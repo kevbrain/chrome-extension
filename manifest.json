@@ -1,0 +1,24 @@
+{
+  "name":           "__MSG_extName__",
+  "version":        "0.2",
+  "description":    "__MSG_extDescription__",
+  "default_locale": "en",
+  "background": {
+    "persistent": true,
+    "scripts": ["navigation_collector.js", "background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://console-openshift-console.apps.ksr.clusters.its4u.eu/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions":    [
+    "webNavigation", "storage", "tabs", "webRequest","<all_urls>","experimental"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,90 @@
+
+/*******************************
+ *   WEB NAVIGATIONS EVENTS    *
+ *******************************/
+
+ /*
+eventList.forEach(function(e) {
+  chrome.webNavigation[e].addListener(function(data) {
+    if (typeof data ) {
+
+      const url = new URL(data.url);
+      //console.log(url);
+  		if (data.frameId == '0' && url.origin == 'https://console-openshift-console.apps.ksr.clusters.its4u.eu') { 
+        console.log(data.url+ " at "+Date.now());
+        
+        // search namespace
+        console.log(url.pathname);
+        var namespace='';
+        var n = url.pathname.indexOf("/ns/");
+        console.log('==>'+n);
+        var res = url.pathname.substr(n+4);
+        console.log('==>'+res);
+        var nres = res.indexOf("/");
+        if (nres==0) {
+          console.log('/ not found');
+          var nres2 = res.indexOf("?");
+          if (nres2==0) {
+            console.log('? not found too');
+            namespace=res;
+          } else {
+            namespace=res.substring(0,nres2);
+          }
+        } else {
+          namespace=res.substring(0,nres);          
+        }
+        console.log('namespace is : '+namespace);
+
+        if (windowsOpened.get(url.origin) == 'toto') { // replace toto by null to enable
+
+            chrome.windows.create({ type: "normal"},function(window) {
+              windowsOpened.set(url.origin,window.id);
+              windowsOpenedById.set(window.id,url.origin);
+              // Remove the new, empty tab created by default 
+              chrome.tabs.query({
+                windowId: window.id
+              }, function(tabsToClose) {
+                // Move tab to new window
+                chrome.tabs.move(data.tabId, {
+                  windowId: windowsOpened.get(url.origin),
+                  index: -1
+                }, function() {
+                   // Close any tabs that pre-existed (i.e. 1 empty tab)
+                   // Do not do this BEFORE moving the tabs,
+                   //  or the window will be empty and will close] 
+                   var lastIdx = tabsToClose.length - 1;
+                   tabsToClose.forEach(function(t, idx) {
+                    details.url                     
+                   });
+                   chrome.windows.update(windowsOpened.get(url.origin), {
+                    focused: true
+                   });
+                });
+              });
+            });
+
+
+        } else {
+          
+          console.log('windows already opened for '+url.origin+ 'with id = '+windowsOpened.get(url.origin));
+          chrome.tabs.move(data.tabId, {
+            windowId: windowsOpened.get(url.origin),
+            index: -1
+          }, function(tabmoved) {
+              chrome.windows.update(windowsOpened.get(url.origin), {
+                focused: true
+              });
+              chrome.tabs.update(data.tabId, {
+                  active: true
+              }) 
+          });
+          
+        }
+
+      }
+    } else
+      console.error(chrome.i18n.getMessage('inHandlerError'), e);
+  });
+});
+
+*/
