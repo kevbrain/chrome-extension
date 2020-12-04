@@ -22,6 +22,16 @@ var namespaceTofind= "/namespaces/";
  *   WEB REQUESTS EVENTS    *
  *******************************/
 
+if (jQuery) {  
+  // jQuery loaded
+
+  console.log('Jquery Loaded in background');
+ 
+} else {
+  // jQuery not loaded
+  console.log('Jquery not Loaded in background');
+}
+
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
 

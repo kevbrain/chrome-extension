@@ -1,16 +1,24 @@
 class App {
     constructor() {
+        
         this.ui = new Ui();
         this.messenger = new Messenger();
-        this.store = new Store();
-        //this.switchActiveExtensionBtnEl = document.querySelector('#switchActiveExtension');
+        this.store = new Store();        
         this.addRulesBtnEl = document.querySelector('#btn__addRules');
+
         this.init();
     }
 
     async init () {
         try {
+            
             //this.bindSwitchActiveExtension();
+            this.ui.insertTabs();
+            this.bindListenerToButtonTab('rules');
+            this.bindListenerToButtonTab('windows');
+            this.bindListenerToButtonTab('webRequests');
+
+            document.querySelector(`#tab_rules`).click();
             this.bindAddRuleBtn();
             /*
              * Check which data in chrome sync, see if we can display some stuff
@@ -23,6 +31,32 @@ class App {
             console.warn(`Error: ${err}`);
             console.warn(`Error: Try restarting the app`);
         }
+    }
+
+    bindListenerToButtonTab(tabName) {
+        document.querySelector(`#tab_${tabName}`).addEventListener('click', () => {
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+          
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+              tablinks[i].style.background = "#f1f1f1";
+              tablinks[i].style.color = "black";
+            }
+          
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            document.querySelector(`#tab_${tabName}`).style.background = "#702F8A";
+            document.querySelector(`#tab_${tabName}`).style.color = "white";
+            evt.currentTarget.className += " active";    
+        });
     }
 
     restoreData() {
@@ -83,10 +117,13 @@ class App {
     }
 
     bindAddRuleBtn () {
+        
         this.addRulesBtnEl.addEventListener('click', () => {
             const rowID = this.ui.insertRuleRow(); // insert row and get ID in return
             this.bindRowListeners(rowID);
+
         })
+        
     }
 
 

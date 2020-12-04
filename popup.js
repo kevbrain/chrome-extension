@@ -6,6 +6,8 @@
  * @filedescription Initializes the extension's popup page.
  */
 
+
+/*
 chrome.runtime.sendMessage(
     {'type': 'getMostRequestedUrls'},
     function generateList(response) {
@@ -36,3 +38,4 @@ chrome.runtime.sendMessage(
       section.innerHTML = '';
       section.appendChild(ol);
     });
+*/

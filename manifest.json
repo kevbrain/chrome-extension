@@ -5,20 +5,22 @@
   "default_locale": "en",
   "background": {
     "persistent": true,
-    "scripts": ["navigation_collector.js", "background.js"]
+    "scripts": ["assets/js/jquery-1.12.4.js", "assets/js/jquery-ui.js","navigation_collector.js", "background.js" ,"popup.js"]
   },
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "js": ["assets/js/jquery-1.12.4.js", "assets/js/jquery-ui.js","popup.js"]
   },
   "content_scripts": [
     {
       "matches": ["https://console-openshift-console.apps.ksr.clusters.its4u.eu/*"],
-      "js": ["content.js"]
+      "js": ["assets/js/jquery-1.12.4.js", "assets/js/jquery-ui.js", "background.js","content.js"]
     }
   ],
   "permissions":    [
     "webNavigation", "storage", "tabs", "webRequest","<all_urls>","experimental"
   ],
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }
